@@ -15,5 +15,5 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USERNAME: ${DB_USER}
+      MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
