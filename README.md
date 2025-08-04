@@ -6,3 +6,4 @@
 6. RUN: docker-compose up --build -d
 7. RUN: docker-compose exec app php artisan migrate
 8. RUN: docker-compose exec app php artisan key:generate if no key is present
+9. Go to http://localhost:8000
