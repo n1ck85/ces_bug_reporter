@@ -27,10 +27,17 @@ RUN composer install --no-scripts --no-autoloader
 # Copy the rest of the application
 COPY . .
 
-# Generate optimized autoload files and run scripts
-RUN composer dump-autoload --optimize \
-    && chown -R www-data:www-data storage bootstrap/cache
+# Generate optimized autoload files
+RUN composer dump-autoload --optimize
+
+# Copy entrypoint script and make it executable
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Set entrypoint to fix permissions at runtime
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Start Apache
+CMD ["apache2-foreground"]
 
 EXPOSE 80
-
-CMD ["apache2-foreground"]
